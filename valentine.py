@@ -1,4 +1,5 @@
-from flask import Flask, render_template_string, redirect, url_for
+from flask import Flask, render_template_string
+import os
 
 app = Flask(__name__)
 
@@ -18,7 +19,6 @@ index_html = """
       align-items: center;
       justify-content: center;
     }
-
     .container {
       background: white;
       color: black;
@@ -27,20 +27,9 @@ index_html = """
       text-align: center;
       width: 350px;
     }
-
-    h1 span {
-      color: #22c55e;
-    }
-
-    .bear {
-      width: 120px;
-      margin: 10px 0;
-    }
-
-    .buttons {
-      margin-top: 20px;
-    }
-
+    h1 span { color: #22c55e; }
+    .bear { width: 120px; margin: 10px 0; }
+    .buttons { margin-top: 20px; }
     button {
       font-size: 18px;
       padding: 10px 25px;
@@ -49,16 +38,8 @@ index_html = """
       cursor: pointer;
       margin: 0 10px;
     }
-
-    .yes-button {
-      background: #ec4899;
-      color: white;
-      font-size: 20px;
-    }
-
-    .no-button {
-      background: #e5e7eb;
-    }
+    .yes-button { background: #ec4899; color: white; font-size: 20px; }
+    .no-button { background: #e5e7eb; }
   </style>
 </head>
 <body>
@@ -141,4 +122,5 @@ def yes():
     return render_template_string(yes_html)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
